@@ -6,10 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
 
 public class homePage {
 
@@ -22,7 +25,7 @@ public class homePage {
 		log.info("adssssssssssssssssssssssssssssssssssss");
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver-win64/chromedriver.exe");
 		 driver= new ChromeDriver();
-	//	 driver.manage().window().maximize();
+		 driver.manage().window().maximize();
 		driver.get("https://www.flipkart.com/");
 		log.info("Driver started successfully");
 	}
@@ -52,8 +55,16 @@ public class homePage {
 	public  void OrderClick() throws InterruptedException {
 		log.info("driver is inside the order test");
 		driver.findElement(By.xpath("(//a[@class=\"IRpwTa _2-ICcC\"])[1]")).click();
-		String windows=driver.getWindowHandle();
-		log.info(windows);
+		ArrayList<String> tabs=new ArrayList<String>(driver.getWindowHandles());
+		log.info(tabs);
+
+
+		driver.switchTo().window(tabs.get(1));
+		log.info(driver.getTitle());
+		String price=driver.findElement(By.cssSelector("[class=\"_30jeq3 _16Jk6d\"]")).getText();
+		log.info(price);
+		driver.switchTo().window(tabs.get(0));
+
 
 		Thread.sleep(2000);
 	}
