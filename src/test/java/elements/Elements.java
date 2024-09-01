@@ -3,6 +3,7 @@ package elements;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import maven.project.homePage;
 
@@ -10,7 +11,7 @@ public class Elements extends  homePage{
 
     private static final Logger log = Logger.getLogger(Elements.class);
 
-    //  public WebDriver webdriver=homePage.driver;
+
     @Test(priority = 0)
       public static void  textbox(){
           driver.findElement(By.id("fullname")).click();
@@ -34,7 +35,7 @@ public class Elements extends  homePage{
 
       }
 
-      @Test(dependsOnMethods = {"textbox"})
+      @Test(dependsOnMethods = {"textbox"}, priority = 0)
       public void checkBox() throws InterruptedException {
 
         if(driver.findElement(By.cssSelector("[href=\"check-box.php\"]")).getText().equalsIgnoreCase("Check Box")){
@@ -51,11 +52,24 @@ public class Elements extends  homePage{
         driver.findElement(By.xpath("//li[@id=\"bf_4\"]/span[@class=\"plus\"]")).click();
         driver.findElement(By.id("c_bf_4")).click();
 
+      }
 
+      @Test(dependsOnMethods = {"checkBox"})
+      public void radioButton() throws InterruptedException {
 
+    //    driver.findElement(By.cssSelector("[class=\"accordion-button\"]")).click();
+        log.info("button extended successfully");
+        Thread.sleep(2000);
+        driver.findElement(By.cssSelector("[href=\"radio-button.php\"]")).click();
+        driver.findElement(By.cssSelector("[class=\"form-check-input\"][value=\"igottwo\"]")).click();
+        Thread.sleep(200);
+        log.info(driver.findElement(By.xpath("//div[@id=\"check\"]/b")).getText());
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@id=\"check\"]/b")).getText(), "Yes");
 
-
-
+        driver.findElement(By.cssSelector("[class=\"form-check-input\"][onclick=\"show3();\"]")).click();
+        Thread.sleep(200);
+        log.info(driver.findElement(By.xpath("//div[@id=\"check1\"]/b")).getText());
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@id=\"check1\"]/b")).getText(), "Impressive");
 
       }
 
