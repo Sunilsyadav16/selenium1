@@ -19,30 +19,30 @@ public class homePage {
 	private static final Logger log = Logger.getLogger(homePage.class);
 
 
-	WebDriver driver;
+	public static WebDriver driver;
 	@BeforeTest
 	public void startDriver() {
 		log.info("adssssssssssssssssssssssssssssssssssss");
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver-win64/chromedriver.exe");
 		 driver= new ChromeDriver();
 		 driver.manage().window().maximize();
-		driver.get("https://www.flipkart.com/");
+		driver.get("https://www.tutorialspoint.com/selenium/practice/text-box.php");
 		log.info("Driver started successfully");
 	}
 
-	@Test(priority = 0)
-	public void mensTshirts() throws InterruptedException {
-		log.info("Page Title"+driver.getTitle());
+/*	//@Test(priority = 0)
+	public void textBox() throws InterruptedException {
+		log.info("Page Title"+driver.getTitle());*/
 	//driver.findElement(By.xpath("//*[@id=\"main-menu\"]/div/div[2]/div[2]/div/span")).click();
-	driver.findElement(By.xpath("(//div/span[@class=\"_1XjE3T\"])[3]"));
+/*	driver.findElement(By.xpath("(//div/span[@class=\"_1XjE3T\"])[3]"));
 		Actions action = new Actions(driver);
 		action.moveToElement(driver.findElement(By.xpath("(//div/span[@class=\"_1XjE3T\"])[3]"))).perform();
 	driver.findElement(By.xpath("//div/object/a[1][@class=\"_3490ry\"]")).click();
-	Thread.sleep(1000);
+	Thread.sleep(1000);*/
 
-	}
+//	}
 
-	@Test(priority = 1)
+/*	@Test(priority = 1)
 	public  void Secrch() throws InterruptedException {
 		log.info("driver is inside the seacrh test");
 		driver.findElement(By.name("q")).click();
@@ -54,20 +54,20 @@ public class homePage {
 	@Test(dependsOnMethods = {"Secrch"})
 	public  void OrderClick() throws InterruptedException {
 		log.info("driver is inside the order test");
-		driver.findElement(By.xpath("(//a[@class=\"IRpwTa _2-ICcC\"])[1]")).click();
+		driver.findElement(By.cssSelector("a[class=\"WKTcLC BwBZTg\"]")).click();
 		ArrayList<String> tabs=new ArrayList<String>(driver.getWindowHandles());
 		log.info(tabs);
 
 
 		driver.switchTo().window(tabs.get(1));
 		log.info(driver.getTitle());
-		String price=driver.findElement(By.cssSelector("[class=\"_30jeq3 _16Jk6d\"]")).getText();
+		String price=driver.findElement(By.cssSelector("[class=\"Nx9bqj CxhGGd\"]")).getText();
 		log.info(price);
 		driver.switchTo().window(tabs.get(0));
 
 
 		Thread.sleep(2000);
-	}
+	}*/
 
 	@AfterTest
 	public void closeDriver(){
